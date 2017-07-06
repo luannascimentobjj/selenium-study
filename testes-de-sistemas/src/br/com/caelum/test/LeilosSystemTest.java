@@ -16,6 +16,7 @@ public class LeilosSystemTest {
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		driver = new FirefoxDriver();
+		driver.get("http://localhost:8080/apenas-teste/limpa");
 		leiloes = new LeilosPage(driver);
 		UsuariosPage usuarios = new UsuariosPage(driver);
 		usuarios.visita();

@@ -16,10 +16,21 @@ public class UsuariosSystemTest {
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		driver = new FirefoxDriver();
+		driver.get("http://localhost:8080/apenas-teste/limpa");
 		this.usuarios = new UsuariosPage(driver);
 		usuarios.visita();
 	}
-
+	@Test
+	public void deveAlterarUmUsuario() throws InterruptedException {
+		usuarios.novo().cadastra("Romilda Nascimento", "mildinha.nascimento@gmail.com");
+		Thread.sleep(1000);
+		usuarios.altera(1).para("Tania Sousa", "tanias.souza@gmail.com");
+		Thread.sleep(1000);
+		assertFalse(usuarios.existeNaListagem("Romilda Nascimento", "mildinha.nascimento@gmail.com"));
+		Thread.sleep(1000);
+		assertTrue(usuarios.existeNaListagem("Tania Sousa", "tanias.souza@gmail.com"));
+	}
+	
 	@Test
 	public void deveAdicionarUmUsuario() throws InterruptedException {
 		

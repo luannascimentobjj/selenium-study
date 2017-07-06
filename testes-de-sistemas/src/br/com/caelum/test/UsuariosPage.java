@@ -16,6 +16,11 @@ public class UsuariosPage {
 		driver.get("http://localhost:8080/usuarios");
 	};
 	
+	public AlterarUsuarioPage altera(int posicao) {
+		driver.findElements(By.linkText("editar")).get(posicao-1).click();
+		return new AlterarUsuarioPage(driver);
+	}
+	
 	public NovoUsuarioPage novo() {
 		driver.findElement(By.linkText("Novo Usuário")).click();
 		return new NovoUsuarioPage(driver);

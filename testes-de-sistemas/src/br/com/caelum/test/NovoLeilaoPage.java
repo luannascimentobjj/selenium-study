@@ -31,4 +31,14 @@ public class NovoLeilaoPage {
 		txtNome.submit();
 	}
 
+	  public boolean validacaoDeProdutoApareceu() {
+	        return driver.getPageSource().contains("Nome obrigatorio!");
+	    }
+
+	    public boolean validacaoDeValorApareceu() {
+	        return driver.getPageSource()
+	                .contains("Valor inicial deve ser maior que zero!");
+	    }
+
+	
 }
