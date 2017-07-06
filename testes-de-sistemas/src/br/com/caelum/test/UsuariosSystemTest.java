@@ -1,48 +1,46 @@
 package br.com.caelum.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class UsuariosSystemTest {
 
 	private FirefoxDriver driver;
+	private UsuariosPage usuarios;
 
 	@Before
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver",
 				"C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		driver = new FirefoxDriver();
+		this.usuarios = new UsuariosPage(driver);
+		usuarios.visita();
 	}
 
 	@Test
-	public void deveAdicionarUmUsuario() {
-
-		driver.get("http://localhost:8080/usuarios/new");
-
-		WebElement nome = driver.findElement(By.name("usuario.nome"));
-		WebElement email = driver.findElement(By.name("usuario.email"));
-
-		nome.sendKeys("Luan Nascimento Oliveira");
-		email.sendKeys("nascimento.hate@gmail.com");
-
-		// 1 opção
-		WebElement botaoSalvar = driver.findElement(By.id("btnSalvar"));
-		botaoSalvar.click();
-
-		boolean achouNome = driver.getPageSource().contains("Luan Nascimento Oliveira");
-		boolean achouEmail = driver.getPageSource().contains("nascimento.hate@gmail.com");
-
-		assertTrue(achouNome);
-		assertTrue(achouEmail);
-
+	public void deveAdicionarUmUsuario() throws InterruptedException {
+		
+		usuarios.novo().cadastra("Luan Nascimento Oliveira", "judith.nega@gmail.com");
+		Thread.sleep(1000);
+		assertTrue(usuarios.existeNaListagem("Luan Nascimento Oliveira", "judith.nega@gmail.com"));
+		
 	}
+	
+	@Test
+    public void deveDeletarUmUsuario() throws InterruptedException {
+
+        usuarios.novo().cadastra("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br");
+        Thread.sleep(1000);
+        assertTrue(usuarios.existeNaListagem ("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br"));
+        usuarios.deletaUsuarioNaPosicao(1);
+        Thread.sleep(1000);
+        assertFalse(usuarios.existeNaListagem("Luan Nascimento Oliveira", "nascimento.hate@gmail.com"));
+    }
+
 
 	@After
 	public void finaliza() {
