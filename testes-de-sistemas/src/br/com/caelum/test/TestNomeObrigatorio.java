@@ -15,7 +15,7 @@ public class TestNomeObrigatorio {
     public void naoDeveAdicionarUmUsuarioSemNome() {
     	System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		WebDriver driver = new FirefoxDriver();
-        driver.get("http://localhost:8080/usuarios/new");
+        driver.get(new URLDaAplicacao().getUrlBase() + "/usuarios/new");
 
         WebElement email = driver.findElement(By.name("usuario.email"));
 

@@ -10,14 +10,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class LeilosSystemTest {
 	
 	private WebDriver driver;
-	private LeilosPage leiloes;
+	private LeiloesPage leiloes;
 	
 	@Before
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		driver = new FirefoxDriver();
-		driver.get("http://localhost:8080/apenas-teste/limpa");
-		leiloes = new LeilosPage(driver);
+		driver.get(new URLDaAplicacao().getUrlBase() + "/apenas-teste/limpa");
+		leiloes = new LeiloesPage(driver);
 		UsuariosPage usuarios = new UsuariosPage(driver);
 		usuarios.visita();
 		usuarios.novo().cadastra("Luan Oliveira", "luan.oliveira@gmail.com");

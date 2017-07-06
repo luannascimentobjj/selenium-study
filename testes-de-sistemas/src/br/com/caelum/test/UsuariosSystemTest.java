@@ -16,7 +16,7 @@ public class UsuariosSystemTest {
 	public void inicializa() {
 		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		driver = new FirefoxDriver();
-		driver.get("http://localhost:8080/apenas-teste/limpa");
+		driver.get(new URLDaAplicacao().getUrlBase() + "/apenas-teste/limpa");
 		this.usuarios = new UsuariosPage(driver);
 		usuarios.visita();
 	}
