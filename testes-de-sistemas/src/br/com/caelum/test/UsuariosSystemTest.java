@@ -14,8 +14,7 @@ public class UsuariosSystemTest {
 
 	@Before
 	public void inicializa() {
-		System.setProperty("webdriver.gecko.driver",
-				"C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nascimento\\Documents\\estudos\\selenium-study\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		this.usuarios = new UsuariosPage(driver);
 		usuarios.visita();
@@ -24,9 +23,9 @@ public class UsuariosSystemTest {
 	@Test
 	public void deveAdicionarUmUsuario() throws InterruptedException {
 		
-		usuarios.novo().cadastra("Luan Nascimento Oliveira", "judith.nega@gmail.com");
+		usuarios.novo().cadastra("Luan Nascimento Oliveira", "nascimento.hate@gmail.com");
 		Thread.sleep(1000);
-		assertTrue(usuarios.existeNaListagem("Luan Nascimento Oliveira", "judith.nega@gmail.com"));
+		assertTrue(usuarios.existeNaListagem("Luan Nascimento Oliveira", "nascimento.hate@gmail.com"));
 		
 	}
 	
